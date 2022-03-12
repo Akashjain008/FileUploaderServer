@@ -6,7 +6,6 @@
   "engines": {
     "node": ">=8.10.0"
   },
-  "type": "module",
   "scripts": {
     "build": "tsc && tsc-alias",
     "server:prod": "node dist/server.js",
