@@ -3,15 +3,11 @@ This API server supports presigned URLs and sent events to SQS.
 
 ### Main features:
 
-- 🐳 Containerized application
-- 🚄 [ExpressJS](http://expressjs.com) framework with [TypeScript](https://www.typescriptlang.org/) on the board
-- ♻️ Live reload
-- 🏇 minified and optimized code for production build
-- ✏️ Linting via [ESLint](https://eslint.org) with Airbnb configuration
-- 🚑 Code Formatter with [Prettier](https://prettier.io)
-- 📘 VSCode configuration: Debug, Settings, Tasks and extension for ESLint, Prettier, TypeScript
-- 🚧 Jest for unit testing
-
+- Docker- Containerized application
+- NodeJs Server- Express and TypeScript
+- ESLint
+- Swagger
+- Test Cases 
 
 ## Getting started
 
