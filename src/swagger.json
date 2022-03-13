@@ -1,14 +1,9 @@
-
 {
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Node Express Template -> (NET.ts) ",
-    "description": "Node.js NET.ts RESTful API",
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    }
+    "title": "Portable Executable File Uploader ",
+    "description": "PE file checker and uploader"
   },
   "basePath": "/",
   "schemes": [
@@ -27,7 +22,7 @@
         "tags": [
           "healthcheck"
         ],
-        "summary": "Application service health check 💗",
+        "summary": "Application service health check.",
         "produces": [
           "application/json"
         ],
@@ -41,17 +36,62 @@
         }
       }
     },
-    "/api/user": {
-      "post": {
+    "/api/file/process/": {
+      "get": {
         "tags": [
-          "create user"
+          "Get PreSignedURL"
         ],
-        "description": "Create user",
+        "summary": "Get presigned url from s3 bucket.",
         "parameters": [
           {
             "name": "x-api-key",
             "in": "header",
-            "default": "Provide API-key (ie. API_KEY_TOKEN from .env.locals file)",
+            "default": "Akashjain008",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filename",
+            "in": "header",
+            "default": "1647169667852_twain_32.dll",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/file/process": {
+      "post": {
+        "tags": [
+          "File events processing"
+        ],
+        "description": "Post file events to SQS for further processing.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "default": "Akashjain008",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filename",
+            "in": "header",
+            "default": "1647169667852_twain_32.dll",
             "schema": {
               "type": "string"
             }
@@ -59,9 +99,9 @@
           {
             "name": "Input",
             "in": "body",
-            "description": "Input data required to create new user",
+            "description": "Input data required to post events.",
             "schema": {
-              "$ref": "#/definitions/UserInput"
+              "$ref": "#/definitions/PostEvents"
             }
           }
         ],
@@ -70,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User has been created",
+            "description": "Event posted successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -104,23 +144,33 @@
       "properties": {
         "input": {
           "type": "object",
-          "$ref": "#/definitions/InputBody"
+          "$ref": "#/definitions/PostEvents"
         }
       }
     },
-    "UserInput": {
+    "PostEvents": {
       "required": [
         "name",
-        "email"
+        "customName",
+        "type",
+        "size"
       ],
       "properties": {
         "name": {
           "type": "string",
-          "default": "John Doe"
+          "default": "twain_32.dll"
         },
-        "email": {
+        "customName": {
           "type": "string",
-          "default": "john.d@example.net"
+          "default": "1647169667852_twain_32.dll"
+        },
+        "type": {
+          "type": "string",
+          "default": "application/x-msdownload"
+        },
+        "size": {
+          "type": "string",
+          "default": "68608"
         }
       }
     },

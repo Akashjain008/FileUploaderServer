@@ -1,17 +1,16 @@
 import { Router } from 'express';
+import protectedByApiKey from '@core/middlewares/apiKey.middleware';
 
 import {
     healthcheck,
     getPreSignedURL,
-    sendRequest,
-    processRequest
+    sendRequest
 } from './fileProcessor.controller';
 
 const router: Router = Router();
 
 router.get('/health', healthcheck);
-router.get('/process', getPreSignedURL);
-router.post('/process', sendRequest);
-router.put('/process', processRequest);
+router.get('/process', [protectedByApiKey], getPreSignedURL);
+router.post('/process', [protectedByApiKey], sendRequest);
 
 export default router;

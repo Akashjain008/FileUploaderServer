@@ -1,16 +1,6 @@
 import Joi from 'joi';
-
-// All env variables used by the app should be defined in this file.
-
-// To define new env:
-// 1. Add env variable to .env.local file;
-// 2. Provide validation rules for your env in envsSchema;
-// 3. Make it visible outside of this module in export section;
-// 4. Access your env variable only via config file.
-// Do not use process.env object outside of this file.
 const dotenv = require('dotenv');
 const path = require('path');
-// const Joi = require('joi');
 
 const env = dotenv.config({ path: path.join(__dirname, '../../.env.local') });
 console.log('env', env.parsed);

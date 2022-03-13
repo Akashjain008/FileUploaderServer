@@ -11,6 +11,8 @@ import limiter from '@core/middlewares/rateLimit.middleware'
 
 const app: Application = express();
 app.use(cors());
+app.use(express.json()) // for json
+app.use(express.urlencoded({ extended: true })) // for form data
 // Apply the rate limiting middleware to all requests
 app.use(limiter);
 app.use(httpLogger.successHandler);
